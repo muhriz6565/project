@@ -19,15 +19,15 @@ with open('data.csv', 'w', newline='') as csvfile:
     spamwriter.writerow(["showid","title","showlink"])
     for i in shows:
         for x in i.find_all("a", href=True):
-            print(x.text)
+            #print(x.text)
             showlink=x.get("href")
-            print(showlink)
+            #print(showlink)
             gotoshow = urllib.request.Request(url=('https://horriblesubs.info'+showlink),headers={'User-Agent': 'Mozilla/5.0'})
             try:
                 showsource=urllib.request.urlopen(gotoshow)
                 stew = BeautifulSoup(showsource, features="html.parser")
                 showid = (stew.find(string=re.compile('hs_showid')))[16:-1]
-                print(showid)
+                #print(showid)
                 #file.write("\n"+showid+x.text)
                 spamwriter.writerow([showid,x.text,showlink])
                 #time.sleep(random.randint(0,5))
